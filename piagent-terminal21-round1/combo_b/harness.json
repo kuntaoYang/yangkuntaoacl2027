@@ -1,0 +1,16 @@
+{
+  "variant": "combo_b",
+  "harbor_import_path": "piagent_qwen:QwenPi",
+  "model": "openai/Qwen3.5-9B",
+  "harbor_version": "0.25.0",
+  "pi_version": "1.4.0",
+  "source_round": "/home/yangkuntao/ACL/Qwen3.5-9b-terminal2.1/1RSI/evolution_round_1",
+  "patch_ids": [
+    "patch-9dc46b21838b"
+  ],
+  "files": {
+    "piagent_qwen.py": "a8bbc6483be7b388bf9727be1bb278da4c6f46d9bc5233cc6efe31fe14a94e4d",
+    "skills/budgeted-execution/SKILL.md": "3ca09191543b506cc02fc94cb9c457d1384049df3a8c4616ba99137d1960c385"
+  },
+  "evaluation_status": "not_rerun"
+}
