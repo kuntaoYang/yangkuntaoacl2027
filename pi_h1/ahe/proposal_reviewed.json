@@ -1,0 +1,63 @@
+{
+  "overview_markdown": "Small first harness: add a few Pi-specific prompt/tool hints targeting repeated baseline failures in required-check discipline, preserving recoverable state, and updating plans when observed results contradict assumptions. This stays at prompt/tool-description level because we only have baseline evidence (89 prior rollouts, no fresh attribution run yet), target model is Qwen3.5-9B, and the safest minimal iteration is short additive guidance compatible with current `buildRules` and bash prompt contribution behavior. Runtime APIs, model settings, and existing semantics remain unchanged; broader middleware/tool changes can be deferred to a later iteration.",
+  "rules": [
+    "Before claiming completion or writing a final artifact, verify the deliverable against the user's stated format and required checks. If a required check fails, is contradicted by tool output, or was never actually run, fix that gap or report the task as still incomplete rather than concluding success.",
+    "When a file or state is partially working, prefer small edits and preserve an easy restore path before risky rewrites or deletions.",
+    "Treat executed evidence as higher priority than prior assumptions, and update the plan when outputs contradict it."
+  ],
+  "bash_guidelines": [
+    "When using pipelines for verification, preserve and inspect the checked command's real exit status instead of letting later commands hide it. Avoid treating `head`, `grep`, redirection wrappers, or silent script execution as proof that the underlying check passed.",
+    "Use bash to run the concrete required verification command for the requested artifact/interface, and confirm the intended assertions actually executed. If a required check fails, do not stop at uncertainty alone—continue by fixing the failure or clearly reporting incompletion.",
+    "Before commands that may mutate, consume, or overwrite a recoverable artifact or tool state, save a simple restorable copy of the original and relevant companion files first. This includes cases where merely opening or operating on the original can change recovery state."
+  ],
+  "changes": [
+    {
+      "change_id": "chg-pi-rules-1",
+      "component": "system_rules",
+      "subtype": "update",
+      "file_path": "packages/coding-agent/src/core/system-prompt.ts",
+      "summary": "Append concise additive rules for required-check gating, preserving recoverable working state, and prioritizing executed evidence over assumptions.",
+      "failure_evidence": "Task 001 steps 32-33 deleted `ars.R` and then could not read it; task 004 step 65 still showed 1 failed/17 passed before a success-style finish at step 76; task 018 step 4 masked the checked process status while steps 8-9 exposed exit 139; task 019 steps 2-9 showed recovery state disappeared after early DB access; task 003 steps 56-71 assumed silent script execution meant tests had run.",
+      "root_cause": "Current prompt guidance is broad but does not explicitly require preserving recoverable state, verifying that required checks truly ran and passed before success claims, or replanning when observed outputs contradict assumptions.",
+      "targeted_fix": "Add three short rules through `buildRules`: gate completion on required checks actually running and passing, preserve restore paths before risky rewrites/deletions, and treat contradictory tool evidence as requiring a plan update.",
+      "predicted_impact": {
+        "expected_fixes": [
+          "adaptive-rejection-sampler",
+          "break-filter-js-from-html",
+          "build-cython-ext",
+          "custom-memory-heap-crash",
+          "db-wal-recovery"
+        ],
+        "at_risk_regressions": [
+          "build-pmars",
+          "modernize-scientific-stack"
+        ],
+        "rationale": "These tasks show concrete baseline failures in destructive state handling or false-positive completion; stronger caution may also add friction on long build/retrieval tasks that sometimes benefit from aggressive rewrites or exploratory command use. Review: use the already-passing build-pmars and modernize-scientific-stack as build-task regression controls; benefits remain unverified hypotheses."
+      }
+    },
+    {
+      "change_id": "chg-pi-bash-1",
+      "component": "tool_descriptions",
+      "subtype": "update",
+      "file_path": "packages/coding-agent/src/core/tools/bash.ts",
+      "summary": "Refine bash guidance to preserve checked-command exit status through pipelines, confirm intended verification actually ran, and preserve originals plus companion files before potentially mutating recovery state.",
+      "failure_evidence": "Task 018 step 4 piped output through `head`, masking the real failing status later seen in steps 8-9; task 003 steps 56-71 treated `python3 test_outputs.py` silence as if tests had executed; task 004 step 65 still had a failed required test; task 019 steps 2-9 showed WAL disappearance after opening the original DB; task 001 steps 32-33 deleted the only source file before recovery.",
+      "root_cause": "The existing bash contribution is too thin to steer the model away from pipeline-masked failures, proxy verification, and mutation of originals before preserving recoverable state.",
+      "targeted_fix": "Add three bash bullets: preserve the checked command's exit status through pipelines, run the concrete required verification and confirm it executed, and copy originals plus relevant companion files before potentially mutating recoverable artifacts or tools.",
+      "predicted_impact": {
+        "expected_fixes": [
+          "break-filter-js-from-html",
+          "build-cython-ext",
+          "custom-memory-heap-crash",
+          "db-wal-recovery",
+          "adaptive-rejection-sampler"
+        ],
+        "at_risk_regressions": [
+          "openssl-selfsigned-cert",
+          "multi-source-data-merger"
+        ],
+        "rationale": "These tasks map directly to observed shell-verification and preservation failures; some already-successful shell-heavy tasks may incur minor extra copy/check commands without guaranteed net score change."
+      }
+    }
+  ]
+}

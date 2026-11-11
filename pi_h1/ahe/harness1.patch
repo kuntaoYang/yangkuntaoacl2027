@@ -1,0 +1,38 @@
+diff --git a/packages/coding-agent/src/core/system-prompt.ts b/packages/coding-agent/src/core/system-prompt.ts
+index e51e14fe4..eb121f2b8 100644
+--- a/packages/coding-agent/src/core/system-prompt.ts
++++ b/packages/coding-agent/src/core/system-prompt.ts
+@@ -119,6 +119,15 @@ function buildRules(
+ 		for (const rule of toolGuidelines[name] ?? []) addRule(rule);
+ 	}
+ 	for (const rule of promptGuidelines) addRule(rule);
++	addRule(
++		"Before claiming completion or writing a final artifact, verify the deliverable against the user's stated format and required checks. If a required check fails, is contradicted by tool output, or was never actually run, fix that gap or report the task as still incomplete rather than concluding success.",
++	);
++	addRule(
++		"When a file or state is partially working, prefer small edits and preserve an easy restore path before risky rewrites or deletions.",
++	);
++	addRule(
++		"Treat executed evidence as higher priority than prior assumptions, and update the plan when outputs contradict it.",
++	);
+ 	addRule("Be concise in your responses");
+ 	addRule("Show file paths clearly when working with files");
+ 	return rules.map((rule) => `- ${rule}`).join("\n");
+diff --git a/packages/coding-agent/src/core/tools/bash.ts b/packages/coding-agent/src/core/tools/bash.ts
+index 4620e2464..48f6172d8 100644
+--- a/packages/coding-agent/src/core/tools/bash.ts
++++ b/packages/coding-agent/src/core/tools/bash.ts
+@@ -44,7 +44,12 @@ const bashSchema = Type.Object({
+ 
+ export const bashToolSystemPromptContribution = {
+ 	snippet: "Execute bash commands (ls, grep, find, etc.)",
+-	guidelines: ["You can inspect PI_* environment variables for current model and session details."],
++	guidelines: [
++		"You can inspect PI_* environment variables for current model and session details.",
++		"When using pipelines for verification, preserve and inspect the checked command's real exit status instead of letting later commands hide it. Avoid treating `head`, `grep`, redirection wrappers, or silent script execution as proof that the underlying check passed.",
++		"Use bash to run the concrete required verification command for the requested artifact/interface, and confirm the intended assertions actually executed. If a required check fails, do not stop at uncertainty alone—continue by fixing the failure or clearly reporting incompletion.",
++		"Before commands that may mutate, consume, or overwrite a recoverable artifact or tool state, save a simple restorable copy of the original and relevant companion files first. This includes cases where merely opening or operating on the original can change recovery state.",
++	],
+ } as const;
+ 
+ export type BashToolInput = Static<typeof bashSchema>;

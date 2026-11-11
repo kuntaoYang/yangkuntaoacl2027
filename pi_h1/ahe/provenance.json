@@ -1,0 +1,24 @@
+{
+  "base_directory": "/home/yangkuntao/ACL/pi",
+  "base_commit": "2c8d1feb147f6b3d97e855da803bfe7b19f3c403",
+  "ahe_commit": "182ea06e578df7b1d503eca537503c1e4c5a8a58",
+  "workflow": "AHE skill + evolve prompt through offline Pi adapter; NOT native NexAU/E2B evolve.py execution",
+  "methodology_sha256": {
+    "skills/agentic-harness-engineering/SKILL.md": "191c2d0aee3eb9057455dfdaa9d705ecc3550557483e798b616cf04d3d110d3e",
+    "agents/evolve_agent/evolve_prompt.md": "e9fc0f5df51f4ddc6d07ae44567923f1ab74da33d9757024bed2373f2a319e76",
+    "skills/agentic-harness-engineering/references/change-manifest-schema.json": "daf77a74f631f644ad09fbd254fe80780f1629b807ea1a86e3ab2135dae65089"
+  },
+  "target_model": "Qwen3.5-9B",
+  "evolution_model_requested": "gpt-5.4",
+  "chat_url": "https://api2.aigcbest.top/v1/chat/completions",
+  "baseline": {
+    "tasks": 89,
+    "passed": 18,
+    "steps": 5088
+  },
+  "input_policy": "Only current final trajectory_atif and final scores from 1RSI/结果. Existing evolution folders excluded. Every step represented with labeled field truncation.",
+  "source_sha256_before": {
+    "packages/coding-agent/src/core/system-prompt.ts": "eef891d637974d09a6611d33e52d66d5f2a93d6e9512259ba45f593c42143617",
+    "packages/coding-agent/src/core/tools/bash.ts": "de2b54d4f4bfbb844ce6d8077f63d715f7d8e80079dd9689b561e45b6679c81b"
+  }
+}

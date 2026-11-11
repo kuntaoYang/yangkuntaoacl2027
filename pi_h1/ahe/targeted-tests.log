@@ -1,0 +1,10 @@
+
+ RUN  v4.1.12 /home/yangkuntao/ACL/pi_h1/packages/coding-agent
+
+·····································
+
+ Test Files  3 passed (3)
+      Tests  37 passed (37)
+   Start at  03:24:21
+   Duration  11.69s (transform 15.85s, setup 0ms, import 21.34s, tests 318ms, environment 1ms)
+

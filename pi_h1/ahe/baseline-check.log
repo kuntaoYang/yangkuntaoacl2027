@@ -1,0 +1,39 @@
+
+> pi-monorepo@0.0.3 check
+> node scripts/biome-check.mjs --write && npm run check:pinned-deps && npm run check:runtime-deps && npm run check:ts-imports && npm run check:entry-graphs && npm run check:install-lock:coding-agent && tsc --noEmit && npm run check:browser-smoke
+
+Checked 2168 files in 8s. No fixes applied.
+
+> pi-monorepo@0.0.3 check:pinned-deps
+> node scripts/check-pinned-deps.mjs
+
+
+> pi-monorepo@0.0.3 check:runtime-deps
+> node scripts/check-runtime-deps.mjs
+
+Public package runtime imports have declared dependencies.
+
+> pi-monorepo@0.0.3 check:ts-imports
+> node scripts/check-ts-relative-imports.mjs
+
+
+> pi-monorepo@0.0.3 check:entry-graphs
+> node scripts/check-entry-graphs.mjs
+
+Entry point graphs are within budget.
+
+> pi-monorepo@0.0.3 check:install-lock:coding-agent
+> node scripts/generate-coding-agent-install-lock.mjs --check
+
+packages/coding-agent/install-lock is up to date.
+packages/ai/test/cache-retention.test.ts(252,30): error TS2345: Argument of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-terra"' is not assignable to parameter of type '"gpt-4" | "gpt-4-turbo" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "gpt-4o" | "gpt-4o-2024-05-13" | "gpt-4o-2024-08-06" | "gpt-4o-2024-11-20" | "gpt-4o-mini" | "gpt-5" | ... 30 more ... | "o4-mini"'.
+  Type '"gpt-6.1-terra"' is not assignable to type '"gpt-4" | "gpt-4-turbo" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "gpt-4o" | "gpt-4o-2024-05-13" | "gpt-4o-2024-08-06" | "gpt-4o-2024-11-20" | "gpt-4o-mini" | "gpt-5" | ... 30 more ... | "o4-mini"'. Did you mean '"gpt-5.6-terra"'?
+packages/ai/test/max-thinking.test.ts(73,43): error TS2345: Argument of type '"gpt-5.6-sol" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol" | "gpt-6.1-terra"' is not assignable to parameter of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'.
+  Type '"gpt-6.1-terra"' is not assignable to type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'. Did you mean '"gpt-5.6-terra"'?
+packages/ai/test/supports-xhigh.test.ts(98,42): error TS2345: Argument of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol" | "gpt-6.1-terra"' is not assignable to parameter of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'.
+  Type '"gpt-6.1-terra"' is not assignable to type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'. Did you mean '"gpt-5.6-terra"'?
+packages/ai/test/supports-xhigh.test.ts(106,37): error TS2345: Argument of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-terra"' is not assignable to parameter of type '"gpt-4" | "gpt-4-turbo" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "gpt-4o" | "gpt-4o-2024-05-13" | "gpt-4o-2024-08-06" | "gpt-4o-2024-11-20" | "gpt-4o-mini" | "gpt-5" | ... 30 more ... | "o4-mini"'.
+  Type '"gpt-6.1-terra"' is not assignable to type '"gpt-4" | "gpt-4-turbo" | "gpt-4.1" | "gpt-4.1-mini" | "gpt-4.1-nano" | "gpt-4o" | "gpt-4o-2024-05-13" | "gpt-4o-2024-08-06" | "gpt-4o-2024-11-20" | "gpt-4o-mini" | "gpt-5" | ... 30 more ... | "o4-mini"'. Did you mean '"gpt-5.6-terra"'?
+packages/ai/test/supports-xhigh.test.ts(130,37): error TS2345: Argument of type '"gpt-6.1-terra"' is not assignable to parameter of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'.
+packages/ai/test/supports-xhigh.test.ts(145,37): error TS2345: Argument of type '"gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol" | "gpt-6.1-terra"' is not assignable to parameter of type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'.
+  Type '"gpt-6.1-terra"' is not assignable to type '"gpt-5.6-luna" | "gpt-5.6-sol" | "gpt-5.6-terra" | "gpt-6-astra" | "gpt-6-luna" | "gpt-6-sol" | "gpt-6.1-sol"'. Did you mean '"gpt-5.6-terra"'?

@@ -1,0 +1,62 @@
+
+> pi-monorepo@0.0.3 build:offline
+> cd packages/telemetry && npm run build && cd ../schema && npm run build && cd ../chord && npm run build && cd ../tui && npm run build && cd ../codemode && npm run build && cd ../mcp && npm run build && cd ../ai && npm run build:offline && cd ../durable && npm run build && cd ../env && npm run build && cd ../agent && npm run build && cd ../coding-agent && npm run build
+
+
+> @earendil-works/pi-telemetry@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-schema@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/chord@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-tui@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-codemode@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-mcp@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-ai@1.4.0 build:offline
+> npm run check:model-data && tsc -p tsconfig.build.json && node ../../scripts/package-files.mjs clean dist/providers/data && node ../../scripts/package-files.mjs copy src/providers/data dist/providers
+
+
+> @earendil-works/pi-ai@1.4.0 check:model-data
+> node scripts/check-model-data.ts
+
+Generated model data is valid.
+
+> @earendil-works/pi-durable@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-env@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-agent-core@1.4.0 build
+> tsc -p tsconfig.build.json
+
+
+> @earendil-works/pi-coding-agent@1.4.0 build
+> npm run build:unbundled && node ../../scripts/build-coding-agent-bundle.mjs
+
+
+> @earendil-works/pi-coding-agent@1.4.0 build:unbundled
+> tsc -p tsconfig.build.json && node ../../scripts/package-files.mjs executable dist/cli.js dist/rpc-entry.js && npm run copy-assets
+
+
+> @earendil-works/pi-coding-agent@1.4.0 copy-assets
+> node ../../scripts/package-files.mjs copy "src/modes/interactive/theme/*.json" dist/modes/interactive/theme && node ../../scripts/package-files.mjs copy "src/modes/interactive/assets/*.png" dist/modes/interactive/assets && node ../../scripts/package-files.mjs copy src/core/export-html/template.html src/core/export-html/template.css src/core/export-html/template.js dist/core/export-html && node ../../scripts/package-files.mjs copy "src/core/export-html/vendor/*.js" dist/core/export-html/vendor
+
+Built packages/coding-agent/dist/bundle (82 files, 9.0 MiB)

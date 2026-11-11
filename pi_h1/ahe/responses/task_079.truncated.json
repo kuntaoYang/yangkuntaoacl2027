@@ -1,0 +1,77 @@
+{
+  "id": "chatcmpl-Eit7FD3WgY1ESitzUPc75i3vEHGpz",
+  "object": "chat.completion",
+  "created": 1794367005,
+  "model": "gpt-5.4",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "length",
+      "content_filter_results": {}
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5857,
+    "completion_tokens": 3,
+    "total_tokens": 5860,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "latency_checkpoint": {
+      "engine_tbt_ms": 72,
+      "engine_ttft_ms": 246,
+      "engine_ttlt_ms": 462,
+      "pre_inference_ms": 98,
+      "service_tbt_ms": 106,
+      "service_ttft_ms": 459,
+      "service_ttlt_ms": 671,
+      "user_visible_ttft_ms": 361
+    }
+  },
+  "system_fingerprint": null,
+  "prompt_filter_results": [
+    {
+      "prompt_index": 0,
+      "content_filter_results": {
+        "hate": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "jailbreak": {
+          "detected": false,
+          "filtered": false
+        },
+        "self_harm": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "sexual": {
+          "filtered": false,
+          "severity": "safe"
+        },
+        "violence": {
+          "filtered": false,
+          "severity": "safe"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "serving_pipereplica": "d20261110140714-5e46619b-default-r1-dp0-default"
+  },
+  "service_tier": "default"
+}
