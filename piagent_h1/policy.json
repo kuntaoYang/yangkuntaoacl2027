@@ -1,0 +1,11 @@
+{
+  "version": "h1-evidence-loop-v1",
+  "pi_version": "1.4.0",
+  "max_completion_reminders": 2,
+  "verification_timeout_seconds": 300,
+  "modules_must_load_from_current_workspace": true,
+  "require_current_revision_validation": true,
+  "require_loaded_changed_python_module_when_python_files_changed": true,
+  "coverage_status": "declared_scope_plus_runtime_import_evidence_not_semantic_proof",
+  "success_status": "local_validation_only_official_grading_is_separate"
+}
